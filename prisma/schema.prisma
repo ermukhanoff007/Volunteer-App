@@ -1,0 +1,94 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String          @id @default(uuid())
+  email          String          @unique
+  password       String
+  createdAt      DateTime        @default(now()) @map("creted_at")
+  updatedAt      DateTime        @updatedAt @map("updated_at")
+  accounts       Account[]
+  sessions       Session[]
+  events         Event[]         @relation("OrganizerEvents")
+  role           Role            @default(USER)
+  participations Participation[]
+
+  @@map("users")
+}
+
+model Event {
+  id             Int             @id @default(autoincrement())
+  title          String
+  description    String
+  date           DateTime
+  location       String
+  image          String?
+  createdAt      DateTime        @default(now()) @map("creted_at")
+  updatedAt      DateTime        @updatedAt @map("updated_at")
+  organizerId    String
+  organizer      User            @relation("OrganizerEvents", fields: [organizerId], references: [id])
+  participations Participation[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Participation {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  eventId   Int
+  createdAt DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, eventId])
+}
+
+enum Role {
+  USER
+  ORGANIZER
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
