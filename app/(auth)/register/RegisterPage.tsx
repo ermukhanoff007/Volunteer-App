@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { registerForm } from "@/server-actions/register";
 
-
 const registerSchema = z
   .object({
     email: z.email("Invalid email"),
@@ -36,12 +35,10 @@ export default function RegisterPage() {
 
   const onSubmit = async (data: RegisterFormData) => {
     setIsLoading(true);
-    const result = await registerForm (data)
-   console.log(result)
+    const result = await registerForm(data);
+    console.log(result);
 
     setIsLoading(false);
-
-   
   };
 
   return (

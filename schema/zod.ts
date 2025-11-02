@@ -10,12 +10,16 @@ export const signInSchema = z.object({
 });
 
 export const registerSchema = z
-  .object({
-    email: z.email(),
-    password: z.string().min(6),
-    confirmPassword: z.string(),
-  })
+  .object({ email: z.email(), password: z.string().min(6), confirmPassword: z.string() })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
     path: ["confirmPassword"],
   });
+
+export const createEventSchema = z.object({
+  title: z.string().min(5, "Title must be at least 5 characters"),
+  description: z.string().min(10, "Description must be at least 10 characters"),
+  date: z.string().refine((val) => !isNaN(Date.parse(val))),
+  location: z.string().min(4, "Location must be at least 4 charactres"),
+  image: z.url("Invalid URL").optional().or(z.literal("")),
+});
