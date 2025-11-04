@@ -19,7 +19,7 @@ export const registerSchema = z
 export const createEventSchema = z.object({
   title: z.string().min(5, "Title must be at least 5 characters"),
   description: z.string().min(10, "Description must be at least 10 characters"),
-  date: z.string().refine((val) => !isNaN(Date.parse(val))),
+  date: z.date(),
   location: z.string().min(4, "Location must be at least 4 charactres"),
   image: z.url("Invalid URL").optional().or(z.literal("")),
 });

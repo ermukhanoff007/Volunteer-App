@@ -40,7 +40,7 @@ const Header = ({ session }: { session: any }) => {
               .map((link) => {
                 if (link.href === "/my" && session?.user.role === "ORGANIZER")
                   return (
-                    <div>
+                    <div key={link.href}>
                       <span onClick={() => setIsOpen(true)}>Create Event</span>
                       {isOpen && (
                         <Modal onClose={() => setIsOpen(false)}>
