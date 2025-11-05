@@ -21,7 +21,7 @@ const Header = ({ session }: { session: any }) => {
 
   const links = [
     { href: "/about", label: "About" },
-    { href: "/my", label: "My Application" },
+    { href: "/my-applications", label: "My Application" },
     { href: "/events", label: "All Events" },
   ];
   return (
@@ -38,7 +38,7 @@ const Header = ({ session }: { session: any }) => {
             {links
               .filter((link) => !(link.href === "/my" && !session?.user?.email))
               .map((link) => {
-                if (link.href === "/my" && session?.user.role === "ORGANIZER")
+                if (link.href === "/my-applications" && session?.user.role === "ORGANIZER")
                   return (
                     <div key={link.href}>
                       <span onClick={() => setIsOpen(true)}>Create Event</span>

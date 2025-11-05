@@ -1,0 +1,38 @@
+import { Button } from "@/components/ui/button";
+import { Prisma } from "@/lib/generated/prisma/client";
+import UnSubscribeButton from "./UnsubscribeButton";
+
+type ParticipationsWithEvent = Prisma.ParticipationGetPayload<{
+  include: { event: true };
+}>;
+interface IProps {
+  participations: ParticipationsWithEvent[];
+}
+function MyApplicationsPage({ participations }: IProps) {
+  console.log(participations);
+  return (
+    <section className="flex items-center flex-col mt-4">
+      <div className="flex flex-col rounded-xl gap-4 items-start bg-white shadow-lg">
+        {participations.map((particpation) => (
+          <div
+            key={particpation.id}
+            className="flex flex-row rounded-xl p-4 justify-between w-full items-center  h-[120px] border "
+          >
+            <div className="flex flex-row p-4 items-center justify-between w-[320px]">
+              <div>
+                <h4 className="text-xl">{particpation.event.title}</h4>
+                <p>{particpation.event.location}</p>
+              </div>
+              <p>{new Date(particpation.event.date).toLocaleDateString()}</p>
+            </div>
+            <div className="flex flex-col justify-end">
+              <UnSubscribeButton eventId={particpation.eventId} userId={particpation.userId} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+export default MyApplicationsPage;

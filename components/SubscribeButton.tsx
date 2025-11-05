@@ -10,14 +10,12 @@ interface IProps {
 }
 
 export default function SubscribeButton({ userId, eventId }: IProps) {
-  const [isLoading,setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const handleSubscribe = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
     await subscribeEvent(eventId, userId);
-    setIsLoading(false)
+    setIsLoading(false);
   };
 
-  return <Button onClick={handleSubscribe}>
-   { isLoading ? "Subscribing" : "Subscribe"}
-    </Button>;
+  return <Button onClick={handleSubscribe}>{isLoading ? "Subscribing" : "Subscribe"}</Button>;
 }
