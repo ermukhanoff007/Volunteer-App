@@ -5,13 +5,14 @@ import { LogIn, LogOut, User } from "lucide-react";
 import Search from "./SearchComponent";
 import { Button } from "./ui/button";
 import { signOutFn } from "@/server-actions/sign-out";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { Modal } from "./Modal";
 import CreateEvent from "./CreateEvent";
 
 const Header = ({ session }: { session: any }) => {
   const router = useRouter();
+  const pathname = usePathname();
   const handeleLogOut = async () => {
     await signOutFn();
     router.push("/");
@@ -53,7 +54,7 @@ const Header = ({ session }: { session: any }) => {
                   <Link
                     key={link.label}
                     href={link.href}
-                    className="font-medium tracking-wide px-2 "
+                    className={`font-medium tracking-wide px-2 ${pathname === link.href ? "text-blue-600 border-b-2 border-blue-600" : "text-gray-500"}`}
                   >
                     <span>{link.label}</span>
                   </Link>

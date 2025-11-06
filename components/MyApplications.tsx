@@ -1,14 +1,7 @@
-import { Button } from "@/components/ui/button";
-import { Prisma } from "@/lib/generated/prisma/client";
 import UnSubscribeButton from "./UnsubscribeButton";
+import { IMyApplicationsProps } from "@/types/participation.types";
 
-type ParticipationsWithEvent = Prisma.ParticipationGetPayload<{
-  include: { event: true };
-}>;
-interface IProps {
-  participations: ParticipationsWithEvent[];
-}
-function MyApplicationsPage({ participations }: IProps) {
+function MyApplicationsPage({ participations }: IMyApplicationsProps) {
   console.log(participations);
   return (
     <section className="flex items-center flex-col mt-4">

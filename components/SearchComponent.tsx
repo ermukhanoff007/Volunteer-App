@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   Command,
@@ -9,13 +9,20 @@ import {
   CommandEmpty,
   CommandItem,
 } from "@/components/ui/command";
-
-const events = ["Conference", "Workshop", "Webinar", "Meetup"];
+import { getEventTitles } from "@/server-actions/getEvents";
 
 export default function Search() {
   const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+  const [events, setEvents] = useState<string[]>([]);
+
+  useEffect(() => {
+    async function fetchTittles() {
+      const data = await getEventTitles();
+      setEvents(data);
+    } fetchTittles()
+  },[]);
 
   const filtered = events.filter((event) => event.toLowerCase().includes(query.toLowerCase()));
 

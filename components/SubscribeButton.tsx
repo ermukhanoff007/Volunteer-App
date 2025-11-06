@@ -2,20 +2,43 @@
 
 import { subscribeEvent } from "@/server-actions/subscribeEvent";
 import { Button } from "./ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { isUserSubscribed } from "@/server-actions/isSubscribed";
+import { unsubscribeEvent } from "@/server-actions/unsubscribeEvent";
+import { useRouter } from "next/navigation";
+import { IButtonProps } from "@/types/button.types";
 
-interface IProps {
-  userId: string;
-  eventId: number;
-}
 
-export default function SubscribeButton({ userId, eventId }: IProps) {
+
+export default function SubscribeButton({ userId, eventId }: IButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const [isSub, setIsSub] = useState(false);
+  const router = useRouter();
+  useEffect(() => {
+    async function checkSub() {
+      const sub = await isUserSubscribed(eventId, userId);
+      setIsSub(sub);
+      setIsLoading(false);
+    }
+    checkSub();
+  }, [eventId, userId]);
+
   const handleSubscribe = async () => {
     setIsLoading(true);
-    await subscribeEvent(eventId, userId);
+    if (isSub) {
+      await unsubscribeEvent(eventId, userId);
+      setIsSub(false);
+    } else {
+      await subscribeEvent(eventId, userId);
+      setIsSub(true);
+    }
     setIsLoading(false);
+    router.refresh();
   };
-
-  return <Button onClick={handleSubscribe}>{isLoading ? "Subscribing" : "Subscribe"}</Button>;
+  if (isLoading) return <Button disabled>Loading...</Button>;
+  return (
+    <Button onClick={handleSubscribe} disabled={isLoading}>
+      {isSub ? "Unsubscribe" : "Subscribe"}
+    </Button>
+  );
 }
