@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Oswald } from "next/font/google";
 import "./globals.css";
 
 
 
-const montserrat = Montserrat({
-  variable: "--font-montserrat",
+const oswald = Oswald({
+  variable: "--font-oswald",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -24,7 +24,7 @@ export default  async function RootLayout({
   
   return (
     <html lang="en">
-      <body className={`${montserrat.variable} antialiased`}>
+      <body className={`${oswald.variable} antialiased`}>
         {children}
       </body>
     </html>

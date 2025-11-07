@@ -9,27 +9,29 @@ import {
   CommandEmpty,
   CommandItem,
 } from "@/components/ui/command";
-import { getEventTitles } from "@/server-actions/getEvents";
+import { getEventTitles, getEvents } from "@/server-actions/getEvents";
+import { IEvent } from "@/types/event.types";
 
 export default function Search() {
   const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
-  const [events, setEvents] = useState<string[]>([]);
+  const [events, setEvents] = useState<IEvent[]>([]);
 
   useEffect(() => {
-    async function fetchTittles() {
-      const data = await getEventTitles();
+    async function fetchEvents() {
+      const data = await getEvents();
       setEvents(data);
-    } fetchTittles()
-  },[]);
+    }
+    fetchEvents();
+  }, []);
 
-  const filtered = events.filter((event) => event.toLowerCase().includes(query.toLowerCase()));
+  const filteredEvents = events.filter((event) =>
+    event.title.toLowerCase().includes(query.toLowerCase())
+  );
 
-  const goToEvent = (eventName: string) => {
-    const slug = eventName.toLowerCase().replace(/\s+/g, "-");
-    router.push(`/events/${slug}`);
-    setIsOpen(false);
+  const goToEventDetails = (eventId: number) => {
+    router.push(`/events/${eventId}`);
   };
 
   return (
@@ -46,9 +48,9 @@ export default function Search() {
         {isOpen && (
           <CommandList className="absolute top-full left-0 mt-1 w-full bg-white shadow-md rounded-md z-50">
             <CommandEmpty>No events found.</CommandEmpty>
-            {filtered.map((event) => (
-              <CommandItem key={event} onSelect={() => goToEvent(event)}>
-                {event}
+            {filteredEvents.map((event) => (
+              <CommandItem key={event.id} onSelect={() => goToEventDetails(event.id)} className="cursor-pointer active:bg-gray-100">
+                {event.title}
               </CommandItem>
             ))}
           </CommandList>

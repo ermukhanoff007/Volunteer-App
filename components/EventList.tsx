@@ -1,49 +1,62 @@
 "use client";
 
-import SubscribeButton from "@/components/SubscribeButton";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import DeleteButton from "./DeleteButton";
-import Link from "next/link";
-import { IEventProps } from "@/types/event.types";
 
-export default function EventsList({ events, user, session }: IEventProps) {
+import Image from "next/image";
+import { useEventStore } from "@/store/eventStore";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import {  IEventProps } from "@/types/event.types";
+
+export default function EventsList({ events }: IEventProps) {
+  const { setEvents, filteredEvents, cityFilter } = useEventStore();
+  const router = useRouter();
+
+  useEffect(() => {
+    setEvents(events);
+  }, [events, setEvents]);
+
+  const goToEventDetails = (eventId: number) => {
+    router.push(`/events/${eventId}`);
+  };
+
   return (
-    <div className="flex justify-center items-center">
-      {events.length === 0 && <p>No events</p>}
-      <div className="grid grid-cols-2 p-4 gap-4 ">
-        {events.map((event) => (
+    <div className="flex justify-center items-start px-4 py-8">
+      {filteredEvents.length === 0 && (
+        <p className="text-gray-500 text-lg italic">No events {cityFilter && `in ${cityFilter}`}</p>
+      )}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-7xl">
+        {filteredEvents.map((event) => (
           <div
             key={event.id}
-            className="w-full flex flex-col items-center  justify-center rounded-xl p-4 bg-amber-50 gap-3 shadow-2xl transition-transform duration-300 ease-in-out hover:scale-102"
+            className="group relative bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 cursor-pointer border border-gray-100"
+            onClick={() => goToEventDetails(event.id)}
           >
             {event.image && (
-              <Image
-                src={event.image}
-                alt="event-image"
-                width={300}
-                height={150}
-                className="rounded-xl h-[200px] "
-              />
-            )}
-            <p>{event.title}</p>
-            <div className="bg-amber-100 flex flex-col p-4 rounded-xl items-start w-full">
-              <p>Description:</p>
-              <p>{event.description}</p>
-            </div>
-            <p>{event.location}</p>
-            <p>{new Date(event.date).toLocaleDateString()}</p>
-            {session?.user.role === "USER" && (
-              <SubscribeButton eventId={event.id} userId={session.user.id} />
-            )}
-            {session?.user.role === "ORGANIZER" && <DeleteButton eventId={event.id} />}
-            {!user && (
-              <div className="flex gap-2">
-                <Link href="/register">
-                  <Button>Log in to Subscribe</Button>
-                </Link>
+              <div className="relative w-full h-48">
+                <Image
+                  src={event.image}
+                  alt="event-image"
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
               </div>
             )}
+
+            <div className="p-5 flex flex-col gap-3">
+              <h3 className="text-xl font-semibold text-gray-800 line-clamp-1">{event.title}</h3>
+
+              <div className="bg-amber-50 p-3 rounded-xl">
+                <p className="text-sm text-gray-500 mb-1 font-medium">Description:</p>
+                <p className="text-gray-700 text-sm line-clamp-3">{event.description}</p>
+              </div>
+
+              <div className="flex flex-col gap-1 text-sm text-gray-600">
+                <p className="flex items-center gap-1">
+                  📍 <span>{event.location}</span>
+                </p>
+                <p>📅 {new Date(event.date).toLocaleDateString()}</p>
+              </div>
+            </div>
           </div>
         ))}
       </div>
