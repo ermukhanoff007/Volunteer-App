@@ -35,8 +35,8 @@ export default function Search() {
   };
 
   return (
-    <div className="relative w-80">
-      <Command>
+    <div className="relative flex">
+      <Command className="w-full">
         <CommandInput
           placeholder="Find Event"
           value={query}

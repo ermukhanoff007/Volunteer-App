@@ -15,7 +15,7 @@ export function Modal({ onClose, children }: IModalProps) {
           className="absolute top-1 right-1 text-gray-700 hover:text-red-600 transition"
           aria-label="Close modal"
         >
-          <X />
+          <X className=" sm:w-6 sm:h-6 h-8 w-8"/>
         </button>
         {children}
       </div>

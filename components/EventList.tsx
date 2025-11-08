@@ -20,11 +20,11 @@ export default function EventsList({ events }: IEventProps) {
   };
 
   return (
-    <div className="flex justify-center items-start px-4 py-8">
+    <div className="flex justify-center items-start px-4 sm:py-8">
       {filteredEvents.length === 0 && (
         <p className="text-gray-500 text-lg italic">No events {cityFilter && `in ${cityFilter}`}</p>
       )}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-7xl">
+      <div className="grid grid-cols-1 md:grid-cols-2  gap-6 w-full max-w-7xl">
         {filteredEvents.map((event) => (
           <div
             key={event.id}
@@ -32,7 +32,7 @@ export default function EventsList({ events }: IEventProps) {
             onClick={() => goToEventDetails(event.id)}
           >
             {event.image && (
-              <div className="relative w-full h-48">
+              <div className="relative w-full h-80">
                 <Image
                   src={event.image}
                   alt="event-image"
