@@ -25,6 +25,8 @@ html, body {
   margin: 0;
   box-sizing: border-box;
   font-family: var(--font-oswald), sans-serif;
+  scroll-behavior: smooth;
+  
 }
 *, *::before, *::after {
   box-sizing: inherit;

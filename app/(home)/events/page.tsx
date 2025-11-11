@@ -2,7 +2,7 @@ import CityFilter from "@/components/CityFilter";
 import EventsPage from "./EventsPage";
 
 const page = () => {
-  return <div className="flex sm:flex-row flex-col items-start  justify-center p-4 gap-4">
+  return <div className="flex sm:flex-row flex-col p-4 gap-4">
     <CityFilter/>
     <EventsPage />
   </div>

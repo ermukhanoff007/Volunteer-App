@@ -32,7 +32,7 @@ const Header = ({ session }: { session: any }) => {
     setRotate(false);
   }
   const links = [
-    { href: "/about", label: "About" },
+    { href: "/#about", label: "About" },
     { href: "/my-applications", label: "My Application" },
     { href: "/events", label: "All Events" },
   ];
