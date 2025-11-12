@@ -2,7 +2,7 @@
 
 import { auth } from "@/auth/auth";
 import { createEventSchema } from "@/schema/zod";
-import prisma from "@/utils/prisma";
+import {prisma} from "@/utils/prisma";
 import { error } from "console";
 
 export async function createEvent(data: unknown) {

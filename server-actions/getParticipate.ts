@@ -1,6 +1,6 @@
 "use server";
 import { auth } from "@/auth/auth";
-import prisma from "@/utils/prisma";
+import {prisma} from "@/utils/prisma";
 
 export default async function getParticipate() {
   const session = await auth();

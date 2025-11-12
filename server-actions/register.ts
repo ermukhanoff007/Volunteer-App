@@ -1,6 +1,6 @@
 "use server";
 
-import prisma from "@/utils/prisma";
+import {prisma} from "@/utils/prisma";
 import { saltAndHashPassword } from "@/utils/password";
 import { registerSchema } from "@/schema/zod";
 
