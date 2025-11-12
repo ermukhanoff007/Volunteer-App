@@ -3,7 +3,7 @@ import Image from "next/image";
 import SubscribeButton from "./SubscribeButton";
 import DeleteButton from "./DeleteButton";
 import Link from "next/link";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
 export default async function EventPage({
   event,

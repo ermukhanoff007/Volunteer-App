@@ -35,14 +35,14 @@ export default function Search() {
   };
 
   return (
-    <div className="relative flex">
+    <div className="relative flex lg:w-[350px] md:w-[200px]">
       <Command className="w-full">
         <CommandInput
           placeholder="Find Event"
           value={query}
           onValueChange={setQuery}
           onFocus={() => setIsOpen(true)}
-          onBlur={() => setIsOpen(false)}
+          onBlur={() => setTimeout(() => setIsOpen(false), 200)}
           className="w-full"
         />
         {isOpen && (

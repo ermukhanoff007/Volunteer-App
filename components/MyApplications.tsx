@@ -1,14 +1,18 @@
 import Link from "next/link";
-import UnSubscribeButton from "./UnsubscribeButton";
+import UnSubscribeButton from "./Event/UnsubscribeButton";
 import { IMyApplicationsProps } from "@/types/participation.types";
 
 function MyApplicationsPage({ participations }: IMyApplicationsProps) {
   return (
     <section className="flex items-center flex-col mt-4">
-      {participations.length === 0 && ( 
+      {participations.length === 0 && (
         <div className="flex flex-col items-center justify-center h-[900px]">
-          <p className="text-gray-500 text-lg italic">You have not subscribed for any events yet.</p>
-          <Link href="/events"className="text-blue-500 underline" >Go to events</Link>
+          <p className="text-gray-500 text-lg italic">
+            You have not subscribed for any events yet.
+          </p>
+          <Link href="/events" className="text-blue-500 underline">
+            Go to events
+          </Link>
         </div>
       )}
       <div className="flex flex-col rounded-xl gap-4 items-start bg-white shadow-lg">

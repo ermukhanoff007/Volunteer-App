@@ -6,6 +6,7 @@ import { getUserFromDb } from "@/utils/user";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "@/utils/prisma";
 import bcryptjs from "bcryptjs";
+import Google from "next-auth/providers/google"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -43,6 +44,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           return null;
         }
       },
+    }), Google({
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
+        },
+      },
     }),
   ],
   callbacks: {
@@ -63,7 +72,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async session({ session, token }) {
       if (token) {
         session.user.id = token.id as string;
-        session.user.role = token.role as string;
+        session.user.role = token.role as "USER" | "ORGANIZER"
       }
       return session;
     },

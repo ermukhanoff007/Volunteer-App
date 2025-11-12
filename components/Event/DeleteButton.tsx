@@ -1,7 +1,7 @@
 "use client";
 import { deleteEvent } from "@/server-actions/deleteEvent";
 import { useState } from "react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
 export default function DeleteButton({ eventId }: { eventId: number }) {
   const [isLoading, setIsLoading] = useState(false);

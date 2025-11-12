@@ -7,12 +7,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import z from "zod";
-import { Calendar } from "./ui/calendar";
+import { Calendar } from "../ui/calendar";
+import { useRouter } from "next/navigation";
 
 type CreateEventFormData = z.infer<typeof createEventSchema>;
 
-export default function CreateEvent() {
+export default function CreateEvent({ onClose }: { onClose: () => void }) {
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const {
     register,
@@ -33,10 +35,10 @@ export default function CreateEvent() {
 
   const onSubmit = async (data: CreateEventFormData) => {
     setIsLoading(true);
-    const result = await createEvent(data);
-    console.log(result);
-
+    await createEvent(data);
     setIsLoading(false);
+    router.push("/events");
+    onClose();
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-6 mt-10">
@@ -106,7 +108,7 @@ export default function CreateEvent() {
           </div>
         </div>
       </div>
-      <Button type="submit" disabled={isLoading} className="w-full font-bold tracking-wide">
+      <Button type="submit" disabled={isLoading} className="w-full font-bold tracking-wide ">
         {isLoading ? "Creating..." : "Create"}
       </Button>
     </form>

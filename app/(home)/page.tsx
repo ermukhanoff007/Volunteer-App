@@ -1,6 +1,6 @@
-import About from "@/components/sections/About";
-import FirstSection from "@/components/sections/FirstSection";
-import HowToUse from "@/components/sections/HowToUse";
+import About from "@/components/Sections/About";
+import FirstSection from "@/components/Sections/FirstSection";
+import HowToUse from "@/components/Sections/HowToUse";
 
 export default function Home() {
   return (

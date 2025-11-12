@@ -1,7 +1,7 @@
 "use client";
 import { unsubscribeEvent } from "@/server-actions/unsubscribeEvent";
 import { useState } from "react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { IButtonProps } from "@/types/button.types";
 
 export default function UnSubscribeButton({ userId, eventId }: IButtonProps) {

@@ -10,13 +10,14 @@ import { signInWithCredentials } from "@/server-actions/sign-in";
 import { useRouter } from "next/navigation";
 
 const loginSchema = z.object({
-  email: z.email("Invalid email"),
+  email: z.email("Invalid email").min(1, "Email is required"),
   password: z.string(),
 });
 type LoginFormData = z.infer<typeof loginSchema>;
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const {
     register,
@@ -28,6 +29,7 @@ export default function LoginPage() {
   });
   const router = useRouter();
   const onSubmit = async (data: LoginFormData) => {
+    setErrorMessage(null);
     setIsLoading(true);
     try {
       const result = await signInWithCredentials(data.email, data.password);
@@ -36,9 +38,9 @@ export default function LoginPage() {
       } else {
         console.error("Sign in error");
       }
-      console.log("result", result);
     } catch (error) {
       console.error("Sign in error");
+      setErrorMessage("Incorrect creditionals.");
     } finally {
       setIsLoading(false);
     }
@@ -74,6 +76,7 @@ export default function LoginPage() {
           {errors.password && (
             <p className="text-sm text-red-500 mt-1">{errors.password.message}</p>
           )}
+          {errorMessage && <p className="text-sm text-red-500 mt-1">{errorMessage}</p>}
         </div>
         <Button type="submit" disabled={isLoading} className="w-full font-bold tracking-wide">
           {isLoading ? "Logging in..." : "Log in"}

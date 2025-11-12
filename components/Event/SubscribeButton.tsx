@@ -1,14 +1,12 @@
 "use client";
 
 import { subscribeEvent } from "@/server-actions/subscribeEvent";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
 import { isUserSubscribed } from "@/server-actions/isSubscribed";
 import { unsubscribeEvent } from "@/server-actions/unsubscribeEvent";
 import { useRouter } from "next/navigation";
 import { IButtonProps } from "@/types/button.types";
-
-
 
 export default function SubscribeButton({ userId, eventId }: IButtonProps) {
   const [isLoading, setIsLoading] = useState(false);

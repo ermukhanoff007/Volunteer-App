@@ -1,5 +1,5 @@
 import { auth } from "@/auth/auth";
-import EventComponent from "@/components/EventComponent";
+import EventComponent from "@/components/Event/EventComponent";
 import getUser from "@/server-actions/getUser";
 import prisma from "@/utils/prisma";
 
