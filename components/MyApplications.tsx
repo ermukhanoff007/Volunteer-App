@@ -1,5 +1,5 @@
 import Link from "next/link";
-import UnSubscribeButton from "./event/UnsubscribeButton";
+import UnSubscribeButton from "./Event/UnsubscribeButton";
 import { IMyApplicationsProps } from "@/types/participation.types";
 
 function MyApplicationsPage({ participations }: IMyApplicationsProps) {

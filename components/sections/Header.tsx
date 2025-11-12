@@ -8,7 +8,7 @@ import { signOutFn } from "@/server-actions/sign-out";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { Modal } from "../Modal";
-import CreateEvent from "../event/CreateEvent";
+import CreateEvent from "../Event/CreateEvent";
 import { SideBar } from "../SideBar";
 
 const Header = ({ session }: { session: any }) => {
