@@ -3,7 +3,7 @@ import { ArrowBigRightIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Modal } from "./Modal";
-import CreateEvent from "./Event/CreateEvent";
+import CreateEvent from "./event/CreateEvent";
 import { useState } from "react";
 interface ISideBarProps {
   session: any;

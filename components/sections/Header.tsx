@@ -8,7 +8,7 @@ import { signOutFn } from "@/server-actions/sign-out";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { Modal } from "../Modal";
-import CreateEvent from "../Event/CreateEvent";
+import CreateEvent from "../event/CreateEvent";
 import { SideBar } from "../SideBar";
 
 const Header = ({ session }: { session: any }) => {
@@ -85,10 +85,17 @@ const Header = ({ session }: { session: any }) => {
           <div className="flex flex-row gap-4 lg:mr-8 items-center">
             {session ? (
               <div className="flex flex-row gap-4  items-center relative">
-                <div className="flex flex-row gap-2 bg-amber-100 px-2 py-2 rounded-xl text-black "onClick={()=>setUserOpen(!userOpen)}>
+                <div
+                  className="flex flex-row gap-2 bg-amber-100 px-2 py-2 rounded-xl text-black "
+                  onClick={() => setUserOpen(!userOpen)}
+                >
                   <User className="w-9" />
                   <span className="md:block hidden">{session?.user?.email}</span>
-                  {userOpen && (<p className="absolute top-15 right-10 bg-white rounded-xl p-2">{session?.user?.email}</p>)}
+                  {userOpen && (
+                    <p className="absolute top-15 right-10 bg-white rounded-xl p-2">
+                      {session?.user?.email}
+                    </p>
+                  )}
                 </div>
                 <Button
                   className="bg-red-600 hover:bg-red-700 w-9 rounded-xl"

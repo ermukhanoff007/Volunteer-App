@@ -1,10 +1,10 @@
 import Link from "next/link";
-import UnSubscribeButton from "./Event/UnsubscribeButton";
+import UnSubscribeButton from "./event/UnsubscribeButton";
 import { IMyApplicationsProps } from "@/types/participation.types";
 
 function MyApplicationsPage({ participations }: IMyApplicationsProps) {
   return (
-    <section className="flex items-center flex-col mt-4">
+    <section className="flex items-center flex-col mt-4 h-screen">
       {participations.length === 0 && (
         <div className="flex flex-col items-center justify-center h-[900px]">
           <p className="text-gray-500 text-lg italic">
