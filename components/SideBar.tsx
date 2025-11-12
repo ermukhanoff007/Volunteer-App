@@ -36,7 +36,7 @@ export function SideBar({ session, isOpen, onClose }: ISideBarProps) {
                       <span onClick={() => setIsModalOpen(true)}>Create Event</span>
                       {ModalIsOpen && (
                         <Modal onClose={() => setIsModalOpen(false)}>
-                          <CreateEvent />
+                          <CreateEvent onClose={()=>setIsModalOpen(false)}/>
                         </Modal>
                       )}
                     </div>
