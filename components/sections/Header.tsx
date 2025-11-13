@@ -39,8 +39,8 @@ const Header = ({ session }: { session: any }) => {
   ];
   return (
     <div className="h-[90px]">
-      <header className="bg-amber-50 shadow-2xl sm:sticky z-50 fixed w-full">
-        <div className="flex flex-row items-center sm:p-4 py-2 justify-between">
+      <header className="bg-amber-50 shadow-2xl sm:sticky z-50 fixed w-full px-4">
+        <div className="flex flex-row items-center sm:p-1 py-2 justify-between">
           <div className="block sm:hidden mr-2">
             <Menu
               className={`transform transition-transform duration-300 w-8 h-8 ${rotate ? "rotate-90" : "rotate-0"}`}
@@ -50,7 +50,7 @@ const Header = ({ session }: { session: any }) => {
           <div>
             <Link href="/">
               <Image src="/birgemiz.png" alt="Logo" width={40} height={40} />
-              <span className="font-bold">Volunteer App</span>
+              <span className="font-bold text-sm">Volunteer App</span>
             </Link>
           </div>
           <div>
@@ -82,17 +82,17 @@ const Header = ({ session }: { session: any }) => {
             </nav>
           </div>
           <Search />
-          <div className="flex flex-row gap-4 lg:mr-8 items-center">
+          <div className="flex flex-row gap-4 lg:mx-8  items-center">
             {session ? (
               <div className="flex flex-row gap-4  items-center relative">
                 <div
-                  className="flex flex-row gap-2 bg-amber-100 px-2 py-2 rounded-xl text-black "
+                  className="flex flex-row gap-2 bg-amber-100 sm:px-2 py-2 px-1 rounded-xl text-black ml-2 sm:ml-0 "
                   onClick={() => setUserOpen(!userOpen)}
                 >
-                  <User className="w-9" />
+                  <User className="w-8"/>
                   <span className="md:block hidden">{session?.user?.email}</span>
                   {userOpen && (
-                    <p className="absolute top-15 right-10 bg-white rounded-xl p-2">
+                    <p className="md:hidden block absolute top-15 right-10 bg-white rounded-xl p-2">
                       {session?.user?.email}
                     </p>
                   )}

@@ -4,7 +4,7 @@ import { Filter } from "lucide-react";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import { Modal } from "./Modal";
-import { se } from "date-fns/locale";
+
 
 export default function CityFilter() {
   const { cityFilter, setCityFilter } = useEventStore();
@@ -22,7 +22,7 @@ export default function CityFilter() {
             <div className="flex-col gap-3 p-2 rounded-xl  bg-white  border-gray-200">
               <label className="text-sm font-semibold text-gray-700 ">Choose your city</label>
 
-              {["Алматы", "Астана", "Караганды", "Семей", "Актау"].map((city) => (
+              {["Алматы", "Астана", "Шымкент", "Караганды", "Семей", "Актау"].map((city) => (
                 <div key={city} className="flex items-center ">
                   <input
                     type="checkbox"
@@ -37,7 +37,9 @@ export default function CityFilter() {
                   </label>
                 </div>
               ))}
-              <Button onClick={() => setIsOpen(false) } className="mt-2">Filter</Button>
+              <Button onClick={() => setIsOpen(false)} className="mt-2">
+                Filter
+              </Button>
             </div>
           </Modal>
         )}

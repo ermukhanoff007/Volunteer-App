@@ -17,7 +17,7 @@ export default function About() {
             <p className="text-sm opacity-80">Events Hosted</p>
           </div>
           <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-lg hover:bg-white/20 transition">
-            <h3 className="text-2xl font-semibold mb-2">120</h3>
+            <h3 className="text-2xl font-semibold mb-2">12k+</h3>
             <p className="text-sm opacity-80">Reviews</p>
           </div>
         </div>

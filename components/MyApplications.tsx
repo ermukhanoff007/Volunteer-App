@@ -4,7 +4,7 @@ import { IMyApplicationsProps } from "@/types/participation.types";
 
 function MyApplicationsPage({ participations }: IMyApplicationsProps) {
   return (
-    <section className="flex items-center flex-col mt-4 h-screen">
+    <section className="flex items-center flex-col mt-8 h-screen">
       {participations.length === 0 && (
         <div className="flex flex-col items-center justify-center h-[900px]">
           <p className="text-gray-500 text-lg italic">
@@ -15,13 +15,13 @@ function MyApplicationsPage({ participations }: IMyApplicationsProps) {
           </Link>
         </div>
       )}
-      <div className="flex flex-col rounded-xl gap-4 items-start bg-white shadow-lg">
+      <div className="flex flex-col rounded-xl gap-4 items-start bg-white shadow-lg mt-6">
         {participations.map((particpation) => (
           <div
             key={particpation.id}
             className="flex flex-row rounded-xl p-4 justify-between w-full items-center  h-[120px] border "
           >
-            <div className="flex flex-row p-4 items-center justify-between w-[320px]">
+            <div className="flex flex-row p-2 items-center justify-between sm:w-[320px] w-[250px]">
               <div>
                 <h4 className="text-xl">{particpation.event.title}</h4>
                 <p>{particpation.event.location}</p>
